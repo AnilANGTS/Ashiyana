@@ -1,9 +1,11 @@
 import LandingPage from "./pages/LandingPage";
+import Property from "./pages/Property";
 
 function App() {
   return (
     <>
-      <LandingPage />
+      {/* <LandingPage /> */}
+      <Property />
     </>
   );
 }
