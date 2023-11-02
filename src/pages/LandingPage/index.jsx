@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "../../assets/logo.png";
 import "../../../node_modules/video-react/dist/video-react.css";
 import "./landing.css";
@@ -15,6 +14,7 @@ import {
   Box,
   Heading,
 } from "@chakra-ui/react";
+
 import { CheckIcon } from "@chakra-ui/icons";
 import Focus from "../../assets/focus-img.png";
 import About from "../../assets/about.png";
@@ -28,9 +28,48 @@ const LandingPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [numberError, setNumberError] = useState("");
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateNumber = (number) => {
+    const numberRegex = /^\d{10}$/; // Validates 10-digit phone number
+    return numberRegex.test(number);
+  };
+
+  const handleEmailChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+    if (!validateEmail(inputEmail)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handleNumberChange = (e) => {
+    const inputNumber = e.target.value;
+    setNumber(inputNumber);
+    if (!validateNumber(inputNumber)) {
+      setNumberError("Invalid phone number");
+    } else {
+      setNumberError("");
+    }
+  };
 
   const FormSubmitHandler = (e) => {
     e.preventDefault();
+
+    // Validate form fields before submitting
+    if (!validateEmail(email) || !validateNumber(number)) {
+      setEmailError("Invalid email address");
+      setNumberError("Invalid phone number");
+      return;
+    }
 
     // Prepare the form data to be sent to the server
     const formData = {
@@ -39,10 +78,7 @@ const LandingPage = () => {
       phone: number,
     };
 
-    // Make a POST request to your API endpoint using fetch
-    // fetch(`${import.meta.env.REACT_APP_API_ENDPOINT_URL}/registration`, {
-    fetch("https://efd3-202-43-120-216.ngrok-free.app/api/v1/registration", {
-
+    fetch(`${ import.meta.env.VITE_API_URL}registration`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,12 +91,13 @@ const LandingPage = () => {
           setName("");
           setEmail("");
           setNumber("");
-
+          setEmailError("");
+          setNumberError("");
           return response.json();
         }
         throw new Error('Network response was not ok.');
       })
-      .then((data) => {
+      .then(() => {
         toast.success("Form data submitted:");
         // Handle the API response as needed with 'data' variable
       })
@@ -68,7 +105,7 @@ const LandingPage = () => {
         toast.error("Error submitting form data: " + error.message);
         // Handle errors here
       });
-  };
+  }
   return (
     <div className="landing--container">
       <section className="hero--section">
@@ -110,29 +147,38 @@ const LandingPage = () => {
                   height={"55px"}
                   onChange={(e) => setName(e.target.value)}
                   value={name}
+                  required
                 />
-                <Input
-                  focusBorderColor={"#F9A526"}
-                  variant="filled"
-                  placeholder="Enter your email"
-                  backgroundColor={"#e5e5e5"}
-                  color={"#737373"}
-                  size={"lg"}
-                  height={"55px"}
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                />
-                <Input
-                  focusBorderColor={"#F9A526"}
-                  variant="filled"
-                  placeholder="Enter your Phone number"
-                  backgroundColor={"#e5e5e5"}
-                  color={"#737373"}
-                  size={"lg"}
-                  height={"55px"}
-                  onChange={(e) => setNumber(e.target.value)}
-                  value={number}
-                />
+                <div>
+
+                  <Input
+                    focusBorderColor={"#F9A526"}
+                    variant="filled"
+                    placeholder="Enter your email"
+                    backgroundColor={"#e5e5e5"}
+                    color={"#737373"}
+                    size={"lg"}
+                    height={"55px"}
+                    onChange={handleEmailChange}
+                    value={email}
+                  />
+                  {emailError && <p style={{ color: "red" }}>{emailError}</p>}
+                </div>
+                <div>
+
+                  <Input
+                    focusBorderColor={"#F9A526"}
+                    variant="filled"
+                    placeholder="Enter your Phone number"
+                    backgroundColor={"#e5e5e5"}
+                    color={"#737373"}
+                    size={"lg"}
+                    height={"55px"}
+                    onChange={handleNumberChange}
+                    value={number}
+                  />
+                  {numberError && <p style={{ color: "red" }}>{numberError}</p>}
+                </div>
                 <Button
                   colorScheme="orange"
                   backgroundColor="#F9A526"
@@ -428,29 +474,39 @@ const LandingPage = () => {
                 onChange={(e) => setName(e.target.value)}
                 value={name}
               />
-              <Input
-                focusBorderColor={"#F9A526"}
-                variant="filled"
-                placeholder="Enter your email"
-                backgroundColor={"#263666"}
-                color={"#fff"}
-                size={"lg"}
-                height={"55px"}
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-              <Input
-                focusBorderColor={"#F9A526"}
-                variant="filled"
-                placeholder="Enter your Phone number"
-                backgroundColor={"#263666"}
-                color={"#fff"}
-                size={"lg"}
-                height={"55px"}
-                onChange={(e) => setNumber(e.target.value)}
-                value={number}
+              <div>
 
-              />
+                <Input
+                  focusBorderColor={"#F9A526"}
+                  variant="filled"
+                  placeholder="Enter your email"
+                  backgroundColor={"#263666"}
+                  color={"#fff"}
+                  size={"lg"}
+                  height={"55px"}
+                  onChange={handleEmailChange}
+                  value={email}
+                />
+                {emailError && <p style={{ color: "red" }}>{emailError}</p>}
+              </div>
+              <div>
+
+                <Input
+                  focusBorderColor={"#F9A526"}
+                  variant="filled"
+                  placeholder="Enter your Phone number"
+                  backgroundColor={"#263666"}
+                  color={"#fff"}
+                  size={"lg"}
+                  height={"55px"}
+                  onChange={handleNumberChange}
+                  value={number}
+
+
+                />
+                {numberError && <p style={{ color: "red" }}>{numberError}</p>}
+              </div>
+
               <Button
                 colorScheme="orange"
                 backgroundColor="#F9A526"

@@ -37,18 +37,56 @@ const Property = () => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [data, setData] = useState([""]);
+  const [emailError, setEmailError] = useState("");
+  const [numberError, setNumberError] = useState("");
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateNumber = (number) => {
+    const numberRegex = /^\d{10}$/; // Validates 10-digit phone number
+    return numberRegex.test(number);
+  };
+
+  const handleEmailChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+    if (!validateEmail(inputEmail)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handleNumberChange = (e) => {
+    const inputNumber = e.target.value;
+    setNumber(inputNumber);
+    if (!validateNumber(inputNumber)) {
+      setNumberError("Invalid phone number");
+    } else {
+      setNumberError("");
+    }
+  };
 
   const FormSubmitHandler = (e) => {
     e.preventDefault();
 
+    // Validate form fields before submitting
+    if (!validateEmail(email) || !validateNumber(number)) {
+      setEmailError("Invalid email address");
+      setNumberError("Invalid phone number");
+      return;
+    }
+
+    // Prepare the form data to be sent to the server
     const formData = {
       name: name,
       email: email,
       phone: number,
     };
 
-    // Make a POST request to your API endpoint using fetch
-    // fetch(`${import.meta.env.REACT_APP_API_ENDPOINT_URL}/registration`, {
     fetch("https://efd3-202-43-120-216.ngrok-free.app/api/v1/registration", {
       method: "POST",
       headers: {
@@ -62,10 +100,11 @@ const Property = () => {
           setName("");
           setEmail("");
           setNumber("");
-
+          setEmailError("");
+          setNumberError("");
           return response.json();
         }
-        throw new Error("Network response was not ok.");
+        throw new Error('Network response was not ok.');
       })
       .then(() => {
         toast.success("Form data submitted:");
@@ -75,12 +114,11 @@ const Property = () => {
         toast.error("Error submitting form data: " + error.message);
         // Handle errors here
       });
-  };
-
+  }
   const fetchData = async () => {
     try {
       const response = await Axios.post(
-        "https://15c9-49-43-0-120.ngrok-free.app/api/v1/projectsById",
+        `${ import.meta.env.VITE_API_URL}projectsById`,
         {
           id: id
         },
@@ -390,6 +428,8 @@ const Property = () => {
                 onChange={(e) => setName(e.target.value)}
                 value={name} // Add the 'value' prop to bind the input value to the 'name' state
               />
+              <div>
+
               <Input
                 focusBorderColor={"#F9A526"}
                 variant="filled"
@@ -398,9 +438,13 @@ const Property = () => {
                 color={"#737373"}
                 size={"lg"}
                 height={"55px"}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 value={email} // Bind input value to the 'email' state
-              />
+                />
+                  {emailError && <p style={{ color: "red" }}>{emailError}</p>}
+                </div>
+                <div>
+
               <Input
                 focusBorderColor={"#F9A526"}
                 variant="filled"
@@ -409,9 +453,11 @@ const Property = () => {
                 color={"#737373"}
                 size={"lg"}
                 height={"55px"}
-                onChange={(e) => setNumber(e.target.value)}
+                onChange={handleNumberChange}
                 value={number} // Bind input value to the 'number' state
-              />
+                />
+                      {numberError && <p style={{ color: "red" }}>{numberError}</p>}
+                </div>
               <Button
                 colorScheme="orange"
                 backgroundColor="#F9A526"

@@ -8,8 +8,7 @@ function PropertyDetails() {
 
     const fetchData = async () => {
         try {
-            const response = await Axios.post(
-                "https://15c9-49-43-0-120.ngrok-free.app/api/v1/projects",
+            const response = await Axios.post(`${ import.meta.env.VITE_API_URL}projects`,
                 {
                     headers: {
                         "Content-Type": "application/json",

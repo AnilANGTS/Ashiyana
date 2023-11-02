@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import Property from "./pages/Property";
 import { Route, Routes,BrowserRouter } from "react-router-dom";
 import PropertyDetails from "./pages/PropertyDetails";
+import Footer from './pages/Footer/index'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Route path="/propertydetails" element={<PropertyDetails />} />
 
     </Routes>
+    <Footer/>
 
     </BrowserRouter>
     </>
