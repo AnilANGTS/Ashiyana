@@ -1,14 +1,15 @@
-import { Card, Image, Stack, Box, HStack, Heading, Flex, Divider, ButtonGroup, Button, Text, CardBody, CardFooter } from '@chakra-ui/react'
+import { Card, Image, Stack, Box, HStack, Heading, Flex, Img, Divider, ButtonGroup, Button, Text, CardBody, CardFooter } from '@chakra-ui/react'
 import Axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.svg'
 function PropertyDetails() {
     const [data, setData] = useState([""]);
 
     const fetchData = async () => {
         try {
-            const response = await Axios.post(`${ import.meta.env.VITE_API_URL}projects`,
+            const response = await Axios.post(`${import.meta.env.VITE_API_URL}projects`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -26,11 +27,26 @@ function PropertyDetails() {
     }, []);
     console.log(data);
     return (
-        <Box >
-            <Box pt={'4'}>
-                <Text textAlign={'center'} fontSize={'4xl'} fontWeight={'bold'} >
-                    Our all projects
+        <Box mr={'4'} ml={'4'} >
+            <Box p={'4'}>
+                <HStack justify={'space-between'}>
+                    <Img src={logo}></Img>
+                    <Link to={`/`}>
+                        <Button mt={'4'} w={'100%'} rounded={'full'} variant={'outline'} borderColor={'#071952'} color='#071952' >
+                            Contact us
+                        </Button>
+                    </Link>
+                </HStack>
+                <Box>
+
+                <Text  fontSize={['24','43']} fontWeight={'medium'} textColor={'#071952'}>
+                    Best recomendation
+
+                </Text >
+                <Text w={'50%'} textAlign={['center','start']} textColor={'#73788C'}>
+                    Discover our exclusive selection of the finest one-of-a-kind luxury properties architectural masterpieces.
                 </Text>
+                </Box>
             </Box>
 
             <Flex m={'4'} flexDir={['column', 'row']} gap={'4'} justify={['center', 'start']} flexWrap={'wrap'}>
@@ -95,7 +111,7 @@ function PropertyDetails() {
                                         </Text>
                                         <Text fontWeight={'bold'} textColor={'#071952'} fontSize={'17px'}>
                                             {item.area} Sq.ft
-                                           
+
                                         </Text>
                                     </Box>
 

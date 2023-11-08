@@ -35,7 +35,7 @@ export default function LargeWithLogoLeft() {
       mt={'7'}
       bg={'#071952'}
       color={'#FFFFFF'}>
-      <Container as={Stack} maxW={'6xl'} h={'60'} py={10}>
+      <Container as={Stack} maxW={'6xl'} h={{base:'max-content',md:'60'}} py={10}>
         <SimpleGrid justifyItems={'center'} templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr' }} spacing={8}>
           {/* Logo and copyright section */}
           <Stack spacing={6} align={'center'}>
