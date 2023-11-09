@@ -1,6 +1,6 @@
 .max--container {
   max-width: 1200px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 @media only screen and (max-width: 1200px) {
@@ -95,7 +95,7 @@
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  height: 548px;
+  height: 530px;
   padding: 1.5rem;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
@@ -196,7 +196,7 @@
 
 .focus--section {
   margin-top: 8rem;
-  background-image: url("../../assets/focus-bg.png");
+  /* background-image: url("../../assets/focus-bg.png"); */
   background-repeat: no-repeat;
   background-position: top right;
   background-size: 550px;
@@ -265,7 +265,7 @@
 }
 
 .facility--left {
-  width: 50%;
+  width: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,7 +273,7 @@
 }
 
 .facility--right {
-  width: 50%;
+  width: 40%;
 }
 
 .facility--right span {
@@ -305,7 +305,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px; /* 162.5% */
+  line-height: 20px; /* 162.5% */
   margin-bottom: 1.5rem;
 }
 
@@ -320,7 +320,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px; /* 144.444% */
+  line-height: 0px; /* 144.444% */
 }
 
 @media screen and (max-width: 768px) {
@@ -537,8 +537,8 @@
 .gallery--img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 1rem;
+  /* object-fit: cover; */
+  border-radius: 3rem;
 }
 
 .item-1 {

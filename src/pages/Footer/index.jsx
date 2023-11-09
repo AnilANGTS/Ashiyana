@@ -11,6 +11,7 @@ import LogoI from '../../assets/logo.svg'
 import Insta from '../../assets/Instagram.svg'
 import FacBook from '../../assets/Facebook.svg'
 import Youtube from '../../assets/Youtube.svg'
+import Footer from '../../assets/Footer2.svg'
 
 
 const Logo = (props) => {
@@ -33,20 +34,26 @@ export default function LargeWithLogoLeft() {
   return (
     <Box
       mt={'7'}
-      bg={'#071952'}
-      color={'#FFFFFF'}>
-      <Container as={Stack} maxW={'6xl'} h={{base:'max-content',md:'60'}} py={10}>
-        <SimpleGrid justifyItems={'center'} templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr' }} spacing={8}>
-          {/* Logo and copyright section */}
-          <Stack spacing={6} align={'center'}>
-            <Box >
+      // bg={'#071952'}
+      backgroundImage={Footer}
+      backgroundRepeat={'no-repeat'}
+      backgroundPosition={'fixed'}
+      backgroundSize={'cover'}
+      w={'full'}
+      opacity={'999'}
+      color={'#FFFFFF'}
+    >
+      <Container  as={Stack} maxW={'8xl'} h={{ base: 'max-content', md: '60' }} py={10}>
+        <SimpleGrid justifyContent={'center'}gap={'8'}  templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr' }} >
+          <Box  align={'center'}>
+            <Box justifyItems={'start'}>
               <Img src={LogoI}></Img>
             </Box>
-            <Text fontSize={'sm'}>We have built our reputation as true local area experts.</Text>
-          </Stack>
+            <Text mt={'8'} fontSize={'sm'}>We have built our reputation as true local area experts.</Text>
+          </Box>
 
           {/* Product section */}
-          <Stack align={'flex-start'}>
+          <Stack mt={'8'} align={'flex-start'}>
             <ListHeader>Service</ListHeader>
 
             <Box textColor={'#CDCDCD'} as="a" href={'#'}>
@@ -58,7 +65,7 @@ export default function LargeWithLogoLeft() {
           </Stack>
 
           {/* Company section */}
-          <Stack align={'flex-start'}>
+          <Stack mt={'8'} align={'flex-start'}>
             <ListHeader>Community</ListHeader>
             <Box textColor={'#CDCDCD'} as="a" href={'#'}>
               Call Now
@@ -71,7 +78,7 @@ export default function LargeWithLogoLeft() {
 
 
           {/* Follow Us section */}
-          <Stack align={'flex-start'}>
+          <Stack mt={'8'} align={'flex-start'}>
             <ListHeader>Follow us on</ListHeader>
             <HStack>
               <Box as="a" href={'#'}>

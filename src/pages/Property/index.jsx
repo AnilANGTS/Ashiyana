@@ -39,7 +39,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import IMG from '../../assets/a.svg'
+import IMG from '../../assets/IMG1.svg'
+import IMG2 from '../../assets/IMG2.svg'
 
 const Property = () => {
   const { id } = useParams()
@@ -170,33 +171,11 @@ const Property = () => {
 
   return (
     <>
-      <Box p={'4'}>
-        <HStack justify={'space-between'}>
-          <Img src={logo}></Img>
-          <Text fontSize={'28px'} fontWeight={'medium'} textColor={'#071952'}>
-            Our Properties
-          </Text>
-          <Link to={"/"}>
-            <Button mt={'4'} w={'100%'} rounded={'full'} variant={'outline'} borderColor={'#071952'} color='#071952' >
-              Contact us
-            </Button>
-          </Link>
-        </HStack>
-        <Box>
-
-          <Text fontSize={['24', '43']} fontWeight={'medium'} textColor={'#071952'}>
-            Best recomendation
-
-          </Text >
-          <Text w={'50%'} textAlign={['center', 'start']} textColor={'#73788C'}>
-            Discover our exclusive selection of the finest one-of-a-kind luxury properties architectural masterpieces.
-          </Text>
-        </Box>
-      </Box>
+      {/* Home › Property Details › */}
 
       <div className="property--container max--container">
         <div className="property--left">
-          <div className="prop--slider--container">
+          {/* <div className="prop--slider--container">
             <Slider {...settings}>
               <div className="prop-slider-img-cont">
                 <img
@@ -214,7 +193,14 @@ const Property = () => {
                 />
               </div>
             </Slider>
-          </div>
+          </div> */}
+          <Box display={'flex'}w={'100%'} >
+            <Img  minW={"70%"} src={IMG}/>
+            <Box mt={'-1'}>
+            <Img minW={'130%'} src={IMG2}/>
+            <Img minW={'130%'} src={IMG2}/>
+            </Box>
+          </Box>
           {/* ------------ */}
           <div className="prop--content">
             <Box>
