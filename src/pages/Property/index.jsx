@@ -7,7 +7,6 @@ import {
   Button,
   Input,
   Icon,
-  Link,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -16,11 +15,23 @@ import {
   useColorModeValue,
   Text,
   Box,
+  Img,
+  HStack,
   Container,
 } from "@chakra-ui/react";
 
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { MdLocationPin } from "react-icons/md";
+import logo from '../../assets/logo.svg'
+import a1 from '../../assets/a1.svg'
+import a2 from '../../assets/a2.svg'
+import a3 from '../../assets/a3.svg'
+import a4 from '../../assets/a4.svg'
+import a5 from '../../assets/a5.svg'
+import a6 from '../../assets/a6.svg'
+
+import { Link } from 'react-router-dom';
+
 
 import Slider from "react-slick";
 import toast from "react-hot-toast";
@@ -28,6 +39,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import IMG from '../../assets/a.svg'
 
 const Property = () => {
   const { id } = useParams()
@@ -87,7 +99,7 @@ const Property = () => {
       phone: number,
     };
 
-    fetch("https://efd3-202-43-120-216.ngrok-free.app/api/v1/registration", {
+    fetch(`${import.meta.env.VITE_API_URL}registration`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -117,8 +129,7 @@ const Property = () => {
   }
   const fetchData = async () => {
     try {
-      const response = await Axios.post(
-        `${ import.meta.env.VITE_API_URL}projectsById`,
+      const response = await Axios.post(`${import.meta.env.VITE_API_URL}projectById`,
         {
           id: id
         },
@@ -141,13 +152,12 @@ const Property = () => {
   console.log(data.name);
 
   const settings = {
-    customPaging: function (i) {
+    customPaging: function () {
       return (
         <a className="page--icon--a">
-          <img
+          <Img
             className="page--icon"
-            src={`https://s3-alpha-sig.figma.com/img/e34b/6456/cfaa9c81d600207c986211e8f8e1288a?Expires=1699228800&Signature=bCTz9e~sw8c6ylkEPvKPN14MvbSSYV1UNjOpxrmpvMTkuZp5xuM73GZv3XaCbJAOSjMlOfnAeHwISGCFGt06X3mOsUDTsGBM~k9gyDuRbypxqg3-EhZ~frbPVddHKEfNZbwvWrVj2dMe90tKi-COVrKNGV-IlLhxEo5oIpP~Yj2AwdZXJNXRXgBslP2K0VhRSj23lKcSucyJ4uefRPbQXNXSFLzPxBuUzpV60Bkv-wpXcJ4gdx74XCizOisQ8cOJFp5lGb4iMTepuNplOHsO0XwLowdsawW9u1GViL1Dd4vYBWccpdoP8z882kF6Dq7y8O4Pdt7swwOkyEhM9IK4Dw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4`}
-          />
+            src={IMG} />
         </a>
       );
     },
@@ -160,7 +170,29 @@ const Property = () => {
 
   return (
     <>
+      <Box p={'4'}>
+        <HStack justify={'space-between'}>
+          <Img src={logo}></Img>
+          <Text fontSize={'28px'} fontWeight={'medium'} textColor={'#071952'}>
+            Our Properties
+          </Text>
+          <Link to={"/"}>
+            <Button mt={'4'} w={'100%'} rounded={'full'} variant={'outline'} borderColor={'#071952'} color='#071952' >
+              Contact us
+            </Button>
+          </Link>
+        </HStack>
+        <Box>
 
+          <Text fontSize={['24', '43']} fontWeight={'medium'} textColor={'#071952'}>
+            Best recomendation
+
+          </Text >
+          <Text w={'50%'} textAlign={['center', 'start']} textColor={'#73788C'}>
+            Discover our exclusive selection of the finest one-of-a-kind luxury properties architectural masterpieces.
+          </Text>
+        </Box>
+      </Box>
 
       <div className="property--container max--container">
         <div className="property--left">
@@ -168,23 +200,17 @@ const Property = () => {
             <Slider {...settings}>
               <div className="prop-slider-img-cont">
                 <img
-                  src={
-                    "https://s3-alpha-sig.figma.com/img/4340/2115/359df0f6fd5f74a326791950f6355706?Expires=1699228800&Signature=h1TJbVeO-ReV3l~jIN8FrYz0TYfvW2SfBkjgbJYa-xAJHTx41rfM4DESX-4q10IyNWfLfZv50HQQa8RqNvH61zDMo0QEwi93qxRBH1m0wBmPg8V1IIy1VfGRx8RVVZ2POKQYfYLVByrGIWfDR0hmxp~~QikmeZHAHQywsDBU4O~WEQ-~kvi9ZBjxlZv3-AgrPChelesC2debcaFm0VvcImB06~GQihNQHOmQk5-8SlfaQ23HvGmXTpS5BlBQL8rHROMYD30LtNbvUNfuik-ju~T4eUrAqxCFP7eV14eblpauZTKwP0eCO3Tx-R65wUktfODa3JS4MUEL7CeZrdEQVw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                  }
+                  src={IMG}
                 />
               </div>
               <div className="prop-slider-img-cont">
                 <img
-                  src={
-                    "https://s3-alpha-sig.figma.com/img/e34b/6456/cfaa9c81d600207c986211e8f8e1288a?Expires=1699228800&Signature=bCTz9e~sw8c6ylkEPvKPN14MvbSSYV1UNjOpxrmpvMTkuZp5xuM73GZv3XaCbJAOSjMlOfnAeHwISGCFGt06X3mOsUDTsGBM~k9gyDuRbypxqg3-EhZ~frbPVddHKEfNZbwvWrVj2dMe90tKi-COVrKNGV-IlLhxEo5oIpP~Yj2AwdZXJNXRXgBslP2K0VhRSj23lKcSucyJ4uefRPbQXNXSFLzPxBuUzpV60Bkv-wpXcJ4gdx74XCizOisQ8cOJFp5lGb4iMTepuNplOHsO0XwLowdsawW9u1GViL1Dd4vYBWccpdoP8z882kF6Dq7y8O4Pdt7swwOkyEhM9IK4Dw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                  }
+                  src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                 />
               </div>
               <div className="prop-slider-img-cont">
                 <img
-                  src={
-                    "https://s3-alpha-sig.figma.com/img/e34b/6456/cfaa9c81d600207c986211e8f8e1288a?Expires=1699228800&Signature=bCTz9e~sw8c6ylkEPvKPN14MvbSSYV1UNjOpxrmpvMTkuZp5xuM73GZv3XaCbJAOSjMlOfnAeHwISGCFGt06X3mOsUDTsGBM~k9gyDuRbypxqg3-EhZ~frbPVddHKEfNZbwvWrVj2dMe90tKi-COVrKNGV-IlLhxEo5oIpP~Yj2AwdZXJNXRXgBslP2K0VhRSj23lKcSucyJ4uefRPbQXNXSFLzPxBuUzpV60Bkv-wpXcJ4gdx74XCizOisQ8cOJFp5lGb4iMTepuNplOHsO0XwLowdsawW9u1GViL1Dd4vYBWccpdoP8z882kF6Dq7y8O4Pdt7swwOkyEhM9IK4Dw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                  }
+                  src={"https://images.pexels.com/photos/1475938/pexels-photo-1475938.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}
                 />
               </div>
             </Slider>
@@ -262,7 +288,7 @@ const Property = () => {
               </ul>
             </div>
 
-            <Box  p={4} borderWidth="1px" borderRadius="md" my={2}>
+            <Box p={4} borderWidth="1px" borderRadius="md" my={2}>
 
 
               <div className="prop--overview prop--tab--secs" id="overview">
@@ -281,24 +307,24 @@ const Property = () => {
                 </Box>
               </div>
             </Box>
-            <Box  p={4} borderWidth="1px" borderRadius="md" my={2}>
+            <Box p={4} borderWidth="1px" borderRadius="md" my={2}>
 
-            <div className="prop--keyarea prop--tab--secs" id="keyarea">
-              <h2>Distance To Key Areas</h2>
-              <div className="prop--keyarea--content prop--tab--secs--content">
-                <ul>
-                  {
-                    data.distance && data.distance.map((item, index) => (
-                      <ul key={index}>
-                        {console.log(item)}
-                        {item}
-                      </ul>
-                    ))
-                  }
+              <div className="prop--keyarea prop--tab--secs" id="keyarea">
+                <h2>Distance To Key Areas</h2>
+                <div className="prop--keyarea--content prop--tab--secs--content">
+                  <ul>
+                    {
+                      data.distance && data.distance.map((item, index) => (
+                        <ul key={index}>
+                          {console.log(item)}
+                          {item}
+                        </ul>
+                      ))
+                    }
 
-                </ul>
+                  </ul>
+                </div>
               </div>
-            </div>
             </Box>
 
             <div className="prop--aminities prop--tab--secs" id="Amenities">
@@ -306,7 +332,7 @@ const Property = () => {
               <div className="prop--aminities--content">
                 <div className="aminities--case">
                   <img
-                    src="https://s3-alpha-sig.figma.com/img/31da/373e/d8b0190bfdf5f3590d1076a33426799f?Expires=1699228800&Signature=d6WnLbZHKyotTF56W2yX8efOEdCsZRNfd4M3YimPqkxbY8uzQDhjADC64tk4EtP~8KOQI3fGfBlAe-wCAo9bqoKmS5UNR61qh1IFSMcawRFRo0Qj~Yk4bRTy51G6b2T5yG5ahYIfvZAfKIPgrjxS~nKMiM0i24KPMNQbKQAaTvTn64IflqS~H1nUIPXKvdXUww3tD-p0uUq6nb9J~dMsMr4r64pqq7R7rMdzdHVdNU1o2vuwWG9H3zL6SlbncfqriStkBibAaT4DIyZi79NlGv8lvt5~NdEeHqrlkFTb0yIWnjzwXplW5sZ7kiRxcY33FtAlg0SQW84OPAGRyTyOzQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                  src={a1}
                     alt=""
                   />
                   <p>Club House</p>
@@ -314,40 +340,40 @@ const Property = () => {
 
                 <div className="aminities--case">
                   <img
-                    src="https://s3-alpha-sig.figma.com/img/cd3d/3c58/98ccf688a277f0eba2ce78572e2bdbdd?Expires=1699228800&Signature=LuN13SDZ35ok1b-Tj9QMZdDSlvbhs6n~nKIUZac8JxZVLI2bWH9GStUPxV1GxxiWi4loQ0fIC6wUE4fDtiZNJTDtlHRDLFWr1j3aJvgph6pg7XTjNxGsyGH5FPKOE3oZw7VN0OFKq-yvAZPM5vGrMZJKXe1gGIldEiyAhrqDyNFpBLW0MnItY2ZiLaF6QcKairgdkySP3PTPdO-HN61~EMgm-V7kix3bijAb-VUAqR~eV-sGAfs18DEJHZOuvt5D7djVREl5gGDWa4gEZx1n2pvqp~cJZQziFfQm9SoEVlN3l5l2HscNyGYJy4BVoa-FhHC8p4fH1c-lk7oDaOCdJg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                    alt=""
+                  src={a2}
+                  alt=""
                   />
                   <p>Cafeteria</p>
                 </div>
 
                 <div className="aminities--case">
                   <img
-                    src="https://s3-alpha-sig.figma.com/img/8320/e538/6169332fb4868aec77a5439afe2411c2?Expires=1699228800&Signature=Qc2OaekAIXP3u5-Kb45hS1308yqARUnKAyHSViiMQZQIHL3O5X6wT9G-ihJrfj6f4RgskgoBGwcVanWOV9-KKnW6mlIVgsc5e160pZUgGso98dEaIDUFpaWTGX04dYhQCl7YLOj86BiQ8z7b~bO8wp9wsdXMc5BKsDOyj~nQsoWCFNdy6ACODpnHDgAFJ55t1N0CIUlMZB3i4z20bSR040oPXD3B-JfictYSVTFhJAxVp9E9nxz4BnxSJ-6WqY87FBOU9N30AXvOrfUUtWcPxk-XYWQCUmc2cd4~fpJXmIvBW~4bQy9UT~boYAiIdUZRMvPJFUtq-Ng6dj3x0wj8nA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                    alt=""
+                  src={a3}
+                  alt=""
                   />
                   <p>Hospital</p>
                 </div>
 
                 <div className="aminities--case">
                   <img
-                    src="https://s3-alpha-sig.figma.com/img/e00e/f21c/a4a6b129fedd97d3a14cf1323efcd729?Expires=1699228800&Signature=nXt5TJfuA8Hhpj9O0-1euqT8g-7FkwU4J1Xf4xJbcOVY~lXtuKDNlqUvCszWzu-My1-QmeWO9A9K~TWzkWRpLpK4ZDtfjwRtpR1OGiMecTPhlcHBNRgPfIGDCG6aogp52-gNmhfVecfTiVPJoY8MutfrBIYVp8AHXep3BLpTcInQbrurK2Dyp8jCwjbtFmEqfoxAWGKawTbZE9bUfYRSFrFsd7n83LnTB21n6YNHEiNRregMDHSl0MXWmxH4NdvEY5EBwb5GNIXli~wsHqCJ11TpNolWJhg26EXzkAeqONqQTvZ-jk0cmBMoPv5fFIS7YUxMmZcYHxzLKgqUc9Ni0Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                    alt=""
+                  src={a4}
+                  alt=""
                   />
                   <p>Jogging Tracks</p>
                 </div>
 
                 <div className="aminities--case">
                   <img
-                    src="https://s3-alpha-sig.figma.com/img/51db/42f7/91cb4678d166d11a78f4a64babadbf39?Expires=1699228800&Signature=EHeJ-tpwJCJmQX1AEHGpAp7P5Y0G53All1TC1fsNKEvIoQJqUtXmFnOxw1qh5cCuNyI3lo0jx4y2spqeEdRhU~R1FrftFQR~eBwO~7jVDeDrwzLvPqCWDwkrbq931NN-gBEsTPJ5ZL7DKZHHksLqzaXrALEJocSq17AhVpODfZEEkhfrZCYvacYEYLKGbrFKgiP1IB0fRDmfIII9XrAdPPXnTwhYj88ii4eWEGT1-CDH7QipjJ0ni7ggYVO3K77aLT6w8sGxgla6fTO4ddBaHRbYrMkXBqrXjrn60LkXWvsAXe5dOPHqziBihnJWrZOgrZ9sBcY9ES0X-2FgcVusOg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                    alt=""
+                  src={a5}
+                  alt=""
                   />
                   <p>Multi-Purpose Hall</p>
                 </div>
 
                 <div className="aminities--case">
                   <img
-                    src="https://s3-alpha-sig.figma.com/img/00ba/b3a1/4ebeaa70126100a6a49344cd895c44b1?Expires=1699228800&Signature=MHMWaU24t~2HlzofoZz14S7tvpRbTu-6RUm4RwS2BscDezEIWFvfNhKb35eW3bS733HBptYM~pnzp0OaV3QOljVvYtKNaYdBo5v5whFodVE7gIZeoGVhB2mQV5Mxl8kd008b~11DiIoTqQvnHoqvXc6td4keiLbJgXzlpGN4EHtgBsBARoU1VTYImA5rje3~m31CdFvUFhc7pc6Ditk8KDQdmPwFgSsFpJ7wRANRghOyMLDOw-n1mx8uX0hjUIf82eLtooSX5Kaqpn9fygGrpNXiFkk3W4fS8UUuH0SaREiskpD9UxXhjiZXuR9y8zyHlKuq0NbtZDVh3y7bn6Imuw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                    alt=""
+                  src={a6}
+                  alt=""
                   />
                   <p>Meditation Area</p>
                 </div>
@@ -430,34 +456,34 @@ const Property = () => {
               />
               <div>
 
-              <Input
-                focusBorderColor={"#F9A526"}
-                variant="filled"
-                placeholder="Enter your email"
-                backgroundColor={"#e5e5e5"}
-                color={"#737373"}
-                size={"lg"}
-                height={"55px"}
-                onChange={handleEmailChange}
-                value={email} // Bind input value to the 'email' state
+                <Input
+                  focusBorderColor={"#F9A526"}
+                  variant="filled"
+                  placeholder="Enter your email"
+                  backgroundColor={"#e5e5e5"}
+                  color={"#737373"}
+                  size={"lg"}
+                  height={"55px"}
+                  onChange={handleEmailChange}
+                  value={email} // Bind input value to the 'email' state
                 />
-                  {emailError && <p style={{ color: "red" }}>{emailError}</p>}
-                </div>
-                <div>
+                {emailError && <p style={{ color: "red" }}>{emailError}</p>}
+              </div>
+              <div>
 
-              <Input
-                focusBorderColor={"#F9A526"}
-                variant="filled"
-                placeholder="Enter your Phone number"
-                backgroundColor={"#e5e5e5"}
-                color={"#737373"}
-                size={"lg"}
-                height={"55px"}
-                onChange={handleNumberChange}
-                value={number} // Bind input value to the 'number' state
+                <Input
+                  focusBorderColor={"#F9A526"}
+                  variant="filled"
+                  placeholder="Enter your Phone number"
+                  backgroundColor={"#e5e5e5"}
+                  color={"#737373"}
+                  size={"lg"}
+                  height={"55px"}
+                  onChange={handleNumberChange}
+                  value={number} // Bind input value to the 'number' state
                 />
-                      {numberError && <p style={{ color: "red" }}>{numberError}</p>}
-                </div>
+                {numberError && <p style={{ color: "red" }}>{numberError}</p>}
+              </div>
               <Button
                 colorScheme="orange"
                 backgroundColor="#F9A526"
